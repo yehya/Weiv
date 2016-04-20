@@ -1,0 +1,7 @@
+
+fade-in
+fade-out
+slide-in
+slide-out 
+pop-in 
+pop-out 

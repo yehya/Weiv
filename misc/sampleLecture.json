@@ -1,0 +1,25 @@
+{
+    id: "1",
+    title: "Intro to JavaScript",
+    course: "CMPSC421",
+    instructor: "Xiacong Fan",
+    theme: "",
+    slides: [{
+        id: "1",
+        Sequence: 1,
+        audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+        entities: [{
+            id: "1",
+            type: "h1",
+            location: "",
+            content: "HEADER!",
+            animation: "fade-in"
+        }, {
+            id: "2",
+            type: "p",
+            location: "",
+            content: "Here is some text!",
+            animation: "fade-in"
+        }]
+    }]
+}

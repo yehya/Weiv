@@ -1,0 +1,9 @@
+
+Yehya -
+
+Website design, all HTML/CSS
+slide-controller
+buttons-controller
+animations
+
+Everything so far.

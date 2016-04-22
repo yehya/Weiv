@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <title>WeiV</title>
+    <!-- CSS -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="/css/skeleton.css" type="text/css" />
+    <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+    <!-- JS -->
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="row page" height="100%">
+        <!-- Entire Page -->
+        <div class="two columns control-area">
+            <!-- Entire left control area -->
+            <div class="row">
+                <h1 class="twelve columns header center">WeiV</h1>
+            </div>
+            <div class="row">
+                <p class="twelve columns subheader center">The ultimate web slide viewer.</p>
+            </div>
+            <div class="row">
+                <p class="twelve columns right slide-button">Next<i class="fa fa-chevron-right" aria-hidden="true"></i></p>
+            </div>
+            <div class="row">
+                <p class="twelve columns right slide-button">Prev<i class="fa fa-chevron-left" aria-hidden="true"></i></p>
+            </div>
+            <div class="row">
+                <p class="twelve columns right slide-button">Play<i class="fa fa-play" aria-hidden="true"></i></p>
+            </div>
+            <div class="row">
+                <p class="twelve columns right slide-button" id="button-full">Full<i class="fa fa-arrows-alt" aria-hidden="true"></i></p>
+            </div>
+            <div class="row">
+                <p class="twelve columns right slide-button">Load<i class="fa fa-upload" aria-hidden="true"></i></p>
+            </div>
+            <div class="row">
+                <p class="twelve columns right slide-button">Save<i class="fa fa-download" aria-hidden="true"></i></p>
+            </div>
+            <div class="row">
+                <p class="twelve columns right slide-button" id="button-sound">Sound<i class="fa fa-volume-up" aria-hidden="true"></i></p>
+            </div>
+        </div>
+        <!-- END -- Entire left control area -->
+
+        <div class="ten columns slide-container" id="slide-container">
+            <!-- Entire Slide Area -->
+            <div class="row slide" id="slide">
+                <!-- SLIDE WILL BE HERE -->
+                <div class="slide-content" id="slide-content">
+                    <!--<h1 class="twelve columns center slide-placeholder">SLIDE HERE</h1>-->
+                    <h1 style="color: white; text-align: center; margin-top: 22%;" id="load-pres">PRESENTATION</h1>
+                </div>
+            </div>
+            <div class="row notes-container">
+                <div class="twelve columns">
+                    <div class="row">
+                        <label class="twelve columns" for="exampleMessage">Notes</label>
+                    </div>
+                    <div class="row">
+                        <textarea class="u-full-width" placeholder="Write notes here..." id="notes-text"></textarea>
+                    </div>
+                    <div class="row">
+                        <input class="three columns button-primary" type="submit" value="Save">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END -- Entire Slide Area -->
+    </div>
+    <!-- END -- Entire Page -->
+    <!-- More JS -->
+    <script type="text/javascript" src="/js/vendor/jquery.color.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/jquery.transit.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/jquery.fittext.js"></script>
+    <script type="text/javascript" src="/js/slide-controller.js"></script>
+    <script type="text/javascript" src="/js/buttons-controller.js"></script>
+    <script type="text/javascript" src="/js/animations.js"></script>
+    <script type="text/javascript">
+        $("#load-pres").fitText();
+    </script>
+</body>
+
+</html>

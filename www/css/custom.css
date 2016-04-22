@@ -1,0 +1,104 @@
+.page {
+    background-color: #AAA;
+}
+
+.header {
+    font-family: 'Raleway', sans-serif;
+}
+
+.subheader {
+    font-family: 'Raleway', sans-serif;
+}
+
+.control-area {
+    background-color: #fff;
+    height: 100%;
+}
+
+.slide-container {
+    background-color: #AAA;
+    margin: 2%;
+}
+
+.notes-container {
+    background-color: #DDD;
+    height: 18%;
+    padding: 10px;
+}
+
+#notes-text {
+    resize: none;
+}
+
+.slide {
+    width: 100%;
+    padding-bottom: 56.25%;
+    background-color: #ddd;
+    position: relative;
+}
+
+.slide > .slide-content {
+    position: absolute;
+    top: 2;
+    bottom: 2;
+    left: 2;
+    right: 2;
+    background-color: #444;
+}
+
+.slide-placeholder {
+    font-size: 4em;
+    color: white;
+}
+
+.fa {
+    text-align: left;
+    font-size: 1em;
+    padding: 10px;
+}
+
+.slide-button {
+    color: #000000;
+    font-size: 1.5em;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+@media (min-width: 555px) {
+    .slide-button {
+        font-size: 0.7em;
+    }
+    .header {
+        font-size: 2.5em;
+    }
+}
+
+@media (min-width: 960px) {
+    .slide-button {
+        font-size: 1em;
+    }
+    .header {
+        font-size: 3em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .slide-button {
+        font-size: 1.3em;
+    }
+    .header {
+        font-size: 4em;
+    }
+}
+
+@media (min-width: 1275px) {
+    #slide-container {
+        width: 1055px;
+    }
+}

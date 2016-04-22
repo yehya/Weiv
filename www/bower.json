@@ -1,0 +1,14 @@
+{
+  "name": "WeiV",
+  "homepage": "https://github.com/yehya/slideViewer",
+  "authors": [
+    "Yehya Awad <yehyaawad@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}

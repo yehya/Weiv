@@ -22,8 +22,16 @@
 
 .notes-container {
     background-color: #DDD;
-    height: 18%;
+    /*height: 18%;*/
     padding: 10px;
+}
+
+.notes-column {
+    background-color: #DDD;
+    margin-top: 2%;
+    margin-left: 0%;
+    margin-right: 0%;
+    height: 96%;
 }
 
 #notes-text {
@@ -97,8 +105,8 @@
     }
 }
 
-@media (min-width: 1275px) {
-    #slide-container {
-        width: 1055px;
-    }
-}
+/*@media (min-width: 1275px) {*/
+/*    #slide-container {*/
+/*        width: 1055px;*/
+/*    }*/
+/*}*/

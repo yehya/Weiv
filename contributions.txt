@@ -6,4 +6,6 @@ slide-controller
 buttons-controller
 animations
 
-Everything so far.
+Manny -
+
+Slide data

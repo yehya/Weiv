@@ -59,6 +59,11 @@
     color: white;
 }
 
+#slide-canvas {
+    height: 100%;
+    width: 100%;
+}
+
 .fa {
     text-align: left;
     font-size: 1em;

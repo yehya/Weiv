@@ -1,4 +1,4 @@
-/* global jQuery, $ */
+/* global jQuery, $, slideLoader */
 
 var slideController = {
     _contentDiv: $("slide-content"),
@@ -12,6 +12,13 @@ var slideController = {
         this._lecture = lectureData;
         this._soundOn = true;
         this._setTheme(this._lecture.theme);
+        // Print lecture info
+        this._print(lectureData.title);
+        this._print(lectureData.course);
+        this._print(lectureData.instructor);
+        // Initialize our slide loader
+        slideLoader.init();
+        slideLoader.setTheme(lectureData.theme);
     },
     toggleSound: function() {
         this._print("toggleSound()");

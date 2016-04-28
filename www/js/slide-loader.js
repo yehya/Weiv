@@ -1,4 +1,4 @@
-/* global jQuery, createjs */
+/* global $, jQuery, createjs */
 
 var slideLoader = {
     _stage: null,
@@ -72,6 +72,8 @@ var slideLoader = {
     _addText: function(entity, size) {
         // Create text
         var text = new createjs.Text(entity.content, size + "px Raleway", this._theme.color);
+        // Bind Easel Display Object to entity
+        entity.displayObject = text;
         // Set location
         text.x = this._width * (entity.location.left / 100);
         text.y = this._height * (entity.location.top / 100);
@@ -137,6 +139,8 @@ var slideLoader = {
             var original = event.result;
             setTimeout(function() {
                 var image = new createjs.Bitmap(original);
+                // Bind Easel Display Object to entity
+                entity.displayObject = image;
                 // Get image original size
                 var height = original.naturalHeight;
                 var width = original.naturalWidth;

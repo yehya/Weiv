@@ -27,7 +27,7 @@
                     top: 15,
                     left: 10
                 },
-                content: "In a Web Browser, when a client requests the root URL " / ", the server sends the chatclient.html",
+                content: "In a Web Browser, when a client requests the root URL &quot / &quot, the server sends the chatclient.html",
                 animation: "pop-in"
             }, {
                 id: "3",
@@ -36,7 +36,7 @@
                     top: 25,
                     left: 10
                 },
-                content: "When creating an EventSource object, a client makes a GET request for the URL " / chat ". Once the server receives such a request, it saves the response stream in an array and keeps that connection open.",
+                content: "When creating an EventSource object, a client makes a GET request for the URL &quot / chat &quot. Once the server receives such a request, it saves the response stream in an array and keeps that connection open.",
                 animation: "pop-in"
             }, {
                 id: "4",
@@ -45,7 +45,7 @@
                     top: 35,
                     left: 10
                 },
-                content: "When a client makes a POST request to " / chat ", it uses the body of the request as a chat message, which is prefixed with the Server-Sent Events "
+                content: "When a client makes a POST request to &quot / chat &quot, it uses the body of the request as a chat message, which is prefixed with the Server-Sent Events "
                 data: " prefix, and written to all the open response streams.",
                 animation: "slide-in"
             }, {
@@ -230,4 +230,4 @@
 
         }
     }]
-}
+};

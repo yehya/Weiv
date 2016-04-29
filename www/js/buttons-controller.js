@@ -30,7 +30,6 @@ $("#button-next").click(function() {
 });
 
 $(document).keydown(function(e) {
-    console.log(e.keyCode);
     if (e.keyCode === 39) {
         slideController.next();
         console.log("Next");
@@ -42,6 +41,7 @@ $(document).keydown(function(e) {
 ////////////////////
 
 $("#button-back").click(function() {
+    console.log("Previous");
     slideController.previous();
 })
 
@@ -57,6 +57,7 @@ $(document).keydown(function(e) {
 ////////////////////
 
 $("#slide-content").click(function() {
+    console.log("Next");
     slideController.next();
 });
 

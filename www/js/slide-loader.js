@@ -13,6 +13,7 @@ var slideLoader = {
         color: "#ffffff"
     },
     init: function() {
+        this._print("init()");
         this._stage = new createjs.Stage("slide-canvas");
         this._width = document.getElementById("slide-canvas").width;
         this._height = document.getElementById("slide-canvas").height;
@@ -21,6 +22,7 @@ var slideLoader = {
         createjs.Ticker.addEventListener("tick", this._stage);
     },
     setBackground: function(color) {
+        this._print("setBackground()");
         if (this._bg !== null) {
             this._bg.graphics.beginFill(color).drawRect(0, 0, this._width, this._height);
             return;
@@ -30,11 +32,13 @@ var slideLoader = {
         this._stage.addChild(this._bg);
     },
     setColor: function(color) {
+        this._print("setColor()");
         for (var i = 0; i < this._textFields.length; i += 1) {
             this._textFields[i].color = color;
         }
     },
     clear: function() {
+        this._print("clear()");
         // Remove all display objects from stage
         for (var i = 0; i < this._displayObjects.length; i += 1) {
             var dispObj = this._displayObjects[i];
@@ -48,11 +52,13 @@ var slideLoader = {
         this.setTheme(this._theme);
     },
     setTheme: function(theme) {
+        this._print("setTheme()");
         this._theme = theme;
         this.setBackground(theme.background);
         this.setColor(theme.color);
     },
     addEntity: function(entity) {
+        this._print("addEntity()");
         if (entity.type === "img") {
             this._addImage(entity);
         }
@@ -67,9 +73,20 @@ var slideLoader = {
         this._entities.push(entity);
     },
     removeEntity: function(entity) {
-        
+        this._print("removeEntity()");
+        this._stage.removeChild(entity.displayObject);
+        // get index
+        var indx = this._displayObjects.indexOf(entity.displayObject);
+        // remove from array using indx
+        this._displayObjects.splice(indx, 1);
+        // get index if text
+        indx = this._textFields.indexOf(entity.displayObject);
+        if (indx > -1) {
+            this._textFields.splice(indx, 1);
+        }
     },
     _addText: function(entity, size) {
+        this._print("_addText()");
         // Create text
         var text = new createjs.Text(entity.content, size + "px Raleway", this._theme.color);
         // Bind Easel Display Object to entity
@@ -83,6 +100,8 @@ var slideLoader = {
         // Add to stage and Array
         this._stage.addChild(text);
         this._textFields.push(text);
+        // Add as display object aswell
+        this._displayObjects.push(text);
         // Animate
         this._animate(entity.animation, text);
         // Check for color
@@ -91,6 +110,7 @@ var slideLoader = {
         }
     },
     _animate: function(animation, displayObject) {
+        this._print("_animate()");
         if (animation === "fade-in") {
             this._fadeIn(displayObject);
         }
@@ -134,6 +154,7 @@ var slideLoader = {
         }, 1000, createjs.Ease.bounceOut).call(function() {});
     },
     _addImage: function(entity) {
+        this._print("_addImage()");
         var _this = this;
         var onImageLoad = function(event) {
             var original = event.result;
@@ -158,6 +179,8 @@ var slideLoader = {
                 image.y = 0;
                 // Add to stage and Array
                 _this._stage.addChild(image);
+                // Add as display object aswell
+                 _this._displayObjects.push(image);
                 // Set location
                 image.x = _this._width * (entity.location.left / 100);
                 image.y = _this._height * (entity.location.top / 100);
@@ -167,6 +190,9 @@ var slideLoader = {
         var preloadImage = new createjs.LoadQueue();
         preloadImage.addEventListener("fileload", onImageLoad);
         preloadImage.loadFile(entity.content);
+    },
+    _print: function (msg) {
+        console.log("slide-loader: "+msg);
     }
 };
 

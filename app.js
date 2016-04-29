@@ -12,7 +12,7 @@ app.set('port', (process.env.PORT || 5000));
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({
     extended: true
-}))
+}));
 
 // parse application/json 
 app.use(bodyParser.json());
@@ -33,5 +33,5 @@ app.use('/slides', express.static('slides'));
 
 app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
-    console.log("https://cmpsc421-yehyaawad.c9users.io/");
+    console.log("https://slide-viewer-yehyaawad.c9users.io/");
 });

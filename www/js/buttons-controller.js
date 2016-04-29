@@ -1,5 +1,24 @@
 /* global jQuery, $, slideController */
 
+var notesManager = {
+    saveNotes: function () {
+        var notes = $("#notes-text").val();
+        var X = "<span style='color: red; float: right;'>X</span>";
+        $("#notes-content").append(notes+" "+X+"<br>");
+    },
+    clear: function () {
+        $("#notes-content").html("");
+    },
+    init: function () {
+        $("#button-saveNotes").click(function () {
+            console.log("SAVE NOTES");
+            notesManager.saveNotes();
+        });
+    }
+};
+
+notesManager.init();
+
 //////////////////////
 // Full Screen Button
 /////////////////////
@@ -26,6 +45,7 @@ $("#button-full").click(function() {
 ////////////////
 
 $("#button-next").click(function() {
+    notesManager.clear();
     slideController.next();
 });
 

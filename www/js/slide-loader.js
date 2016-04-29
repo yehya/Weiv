@@ -86,6 +86,9 @@ var slideLoader = {
         }
     },
     _addText: function(entity, size) {
+        if (typeof entity.size !== "undefined" && !isNaN(entity.size)) {
+            size = entity.size;
+        }
         this._print("_addText()");
         // Create text
         var text = new createjs.Text(entity.content, size + "px Raleway", this._theme.color);
@@ -131,7 +134,7 @@ var slideLoader = {
         displayObject.alpha = 0;
         createjs.Tween.get(displayObject).to({
             alpha: 1
-        }, 4000).call(function() {});
+        }, 2500).call(function() {});
     },
     _slideIn: function(displayObject) {
         var prevX = displayObject.x;
@@ -168,7 +171,7 @@ var slideLoader = {
                 console.log(height);
                 console.log(width);
                 // Calculate target size
-                var targetHeight = _this._height * (entity.height/100);
+                var targetHeight = _this._height * (entity.height / 100);
                 // Calculate scale factor
                 var scale = targetHeight / height;
                 // Set new scales
@@ -180,7 +183,7 @@ var slideLoader = {
                 // Add to stage and Array
                 _this._stage.addChild(image);
                 // Add as display object aswell
-                 _this._displayObjects.push(image);
+                _this._displayObjects.push(image);
                 // Set location
                 image.x = _this._width * (entity.location.left / 100);
                 image.y = _this._height * (entity.location.top / 100);
@@ -191,8 +194,8 @@ var slideLoader = {
         preloadImage.addEventListener("fileload", onImageLoad);
         preloadImage.loadFile(entity.content);
     },
-    _print: function (msg) {
-        console.log("slide-loader: "+msg);
+    _print: function(msg) {
+        console.log("slide-loader: " + msg);
     }
 };
 

@@ -29,9 +29,9 @@
             <div class="row">
                 <p class="twelve columns right slide-button" id="button-back">Prev<i class="fa fa-chevron-left" aria-hidden="true"></i></p>
             </div>
-            <div class="row">
-                <p class="twelve columns right slide-button">Play<i class="fa fa-play" aria-hidden="true"></i></p>
-            </div>
+            <!--<div class="row">-->
+            <!--    <p class="twelve columns right slide-button">Play<i class="fa fa-play" aria-hidden="true"></i></p>-->
+            <!--</div>-->
             <div class="row">
                 <p class="twelve columns right slide-button" id="button-full">Full<i class="fa fa-arrows-alt" aria-hidden="true"></i></p>
             </div>
@@ -64,7 +64,7 @@
                         <textarea class="u-full-width" placeholder="Write notes here..." id="notes-text"></textarea>
                     </div>
                     <div class="row">
-                        <input class="three columns button-primary" type="submit" value="Save">
+                        <input class="three columns button-primary" id="button-saveNotes" type="submit" value="Save">
                     </div>
                 </div>
             </div>
@@ -73,12 +73,12 @@
         <div class="three columns notes-column">
             <div class="row">
                 <div class="twelve columns">
-                    <h1>Notes</h1>
+                    <h1 class="notes-header">Notes</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="twelve columns">
-                    <p id="notes-content">Notes and stuff</p>
+                    <p id="notes-content"></p>
                 </div>
             </div>
         </div>
@@ -98,6 +98,7 @@
     <script type="text/javascript" src="/js/buttons-controller.js"></script>
     <script type="text/javascript" src="/js/animations.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/weiv.js"></script>
 </body>
 
 </html>

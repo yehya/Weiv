@@ -4,6 +4,7 @@ var slideController = {
     _contentDiv: $("slide-content"),
     _lecture: {}, // holds lecture data object
     _currSlide: null, // current slide on display
+    _currEntities: null, // current slide on display
     _slideSequence: null, // slide number
     _entitySequence: null, // entity number
     _soundOn: true, // whether sound is on or not.
@@ -51,6 +52,15 @@ var slideController = {
     },
     previous: function() { // could be slide or animation
         this._print("previous()");
+        if (this._entitySequence > 0) {
+            this._entitySequence--;
+            var ent = this._currEntities[this._entitySequence];
+            slideLoader.removeEntity(ent);
+        } else {
+            if (this._slideSequence > 0) {
+                this._prepareSlide(this._slideSequence-1);
+            }
+        }
     },
     _print: function(msg) {
         console.log("slideController: " + msg);
@@ -97,3 +107,4 @@ var slideController = {
         }
     }
 };
+

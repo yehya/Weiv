@@ -38,6 +38,14 @@
     resize: none;
 }
 
+#notes-content {
+    padding: 10px;
+}
+
+.notes-header {
+    margin: 10px;
+}
+
 .slide {
     width: 100%;
     padding-bottom: 56.25%;

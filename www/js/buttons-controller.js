@@ -1,4 +1,4 @@
-/* global jQuery, $, slideController */
+/* global jQuery, $, slideController, slideLoader */
 
 var notesManager = {
     saveNotes: function () {
@@ -93,4 +93,25 @@ $("#button-sound").click(function() {
         $(".fa-volume-up").removeClass("fa-volume-up").addClass("fa-volume-off");
     }
     slideController.toggleSound();
+});
+
+$(".dark-button").click(function() {
+    slideLoader.setTheme({
+        background: "#000",
+        color: "#fff"
+    });
+});
+
+$(".color-button").click(function() {
+    slideLoader.setTheme({
+        background: "#00A8E8",
+        color: "#8D99AE"
+    });
+});
+
+$(".light-button").click(function() {
+    slideLoader.setTheme({
+        background: "#fff",
+        color: "#000"
+    });
 });

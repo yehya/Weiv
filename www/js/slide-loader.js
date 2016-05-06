@@ -13,13 +13,15 @@ var slideLoader = {
         color: "#ffffff"
     },
     init: function() {
-        this._print("init()");
-        this._stage = new createjs.Stage("slide-canvas");
-        this._width = document.getElementById("slide-canvas").width;
-        this._height = document.getElementById("slide-canvas").height;
-        this.setBackground(this._theme.background);
-        createjs.Ticker.setFPS(60);
-        createjs.Ticker.addEventListener("tick", this._stage);
+        if (this._stage === null) {
+            this._print("init()");
+            this._stage = new createjs.Stage("slide-canvas");
+            this._width = document.getElementById("slide-canvas").width;
+            this._height = document.getElementById("slide-canvas").height;
+            this.setBackground(this._theme.background);
+            createjs.Ticker.setFPS(60);
+            createjs.Ticker.addEventListener("tick", this._stage);
+        }
     },
     setBackground: function(color) {
         this._print("setBackground()");
@@ -198,66 +200,3 @@ var slideLoader = {
         console.log("slide-loader: " + msg);
     }
 };
-
-// slideLoader.init();
-
-/// TESTING
-
-// slideLoader.setTheme({
-//     background: "#444",
-//     color: "#0BD"
-// });
-
-var slideEntities = [{
-    id: "1",
-    type: "h1",
-    location: {
-        top: 10,
-        left: 5
-    },
-    content: "EventSource: Chat Client!",
-    animation: "fade-in",
-    color: "#fff"
-}, {
-    id: "2",
-    type: "p",
-    location: {
-        top: 30,
-        left: 5
-    },
-    content: "In a Web Browser, when a client requests the root URL ' / ' , the server sends the chatclient.html",
-    animation: "slide-in"
-}, {
-    id: "3",
-    type: "p",
-    location: {
-        top: 45,
-        left: 5
-    },
-    content: "When creating an EventSource object, a client makes a GET request for the URL  ' / chat ' . Once the server receives such a request, it saves the response stream in an array and keeps that connection open.",
-    animation: "drop-in"
-}, {
-    id: "4",
-    type: "p",
-    location: {
-        top: 65,
-        left: 5
-    },
-    content: "When a client makes a POST request to ' / chat ', it uses the body of the request as a chat message, which is prefixed with the Server-Sent Events ",
-    data: " prefix, and written to all the open response streams.",
-    animation: "slide-in"
-}, {
-    id: "5",
-    type: "img",
-    height: 25,
-    location: {
-        top: 75,
-        left: 10
-    },
-    content: "/slides/images/slidepic1.PNG",
-    animation: "slide-in"
-}];
-
-// $.each(slideEntities, function(indx, val) {
-//     slideLoader.addEntity(val);
-// });

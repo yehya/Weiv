@@ -1,4 +1,4 @@
-/* global jQuery, $, slideController, slideLoader, notesManager */
+/* global jQuery, $, slideController, slideLoader, notesManager, swal */
 
 //////////////////////
 // Full Screen Button
@@ -26,7 +26,6 @@ $("#button-full").click(function() {
 ////////////////
 
 $("#button-next").click(function() {
-    notesManager.clear();
     slideController.next();
 });
 
@@ -76,25 +75,56 @@ $("#button-sound").click(function() {
     slideController.toggleSound();
 });
 
-$(".dark-button").click(function() {
-    slideLoader.setTheme({
-        background: "#000",
-        color: "#fff"
-    });
-});
+////////////////
+// Theme Button
+////////////////
 
-$(".color-button").click(function() {
-    slideLoader.setTheme({
-        background: "#00A8E8",
-        color: "#8D99AE"
-    });
-});
+var themeAlert = function() {
+    swal({
+        title: 'Select a theme',
+        input: 'select',
+        inputOptions: {
+            'DARK': 'Dark',
+            'LIGHT': 'Light',
+            'COLOR': 'Color'
+        },
+        inputPlaceholder: 'Select theme',
+        showCancelButton: true,
+        inputValidator: function(value) {
+            return new Promise(function(resolve, reject) {
+                resolve();
+            });
+        }
+    }).then(function(result) {
+        if (result) {
+            swal({
+                type: 'success',
+                html: 'You selected: ' + result
+            });
+            if (result === "DARK") {
+                slideLoader.setTheme({
+                    background: "#000",
+                    color: "#fff"
+                });
+            }
+            else if (result === "LIGHT") {
+                slideLoader.setTheme({
+                    background: "#fff",
+                    color: "#000"
+                });
+            }
+            else {
+                slideLoader.setTheme({
+                    background: "#F9C22E",
+                    color: "#E01A4F"
+                });
+            }
+        }
+    })
+};
 
-$(".light-button").click(function() {
-    slideLoader.setTheme({
-        background: "#fff",
-        color: "#000"
-    });
+$("#theme-button").click(function() {
+    themeAlert();
 });
 
 /////////////////
@@ -104,4 +134,41 @@ $(".light-button").click(function() {
 $("#button-saveNotes").click(function() {
     console.log("SAVE NOTES");
     notesManager.saveNotes();
+});
+
+////////////////
+// Save Button
+////////////////
+
+$("#button-save").click(function() {
+    var lectureString = JSON.stringify(slideController.getLectureData());
+    sessionStorage.setItem("lecture", lectureString);
+    swal(
+        'Saved!',
+        'Lecture & Notes have been saved!',
+        'success'
+    );
+});
+
+////////////////
+// Load Button
+////////////////
+
+$("#button-load").click(function() {
+    if (sessionStorage.getItem("lecture") === null) {
+        swal(
+            'No saved lecture',
+            'There are no saved lectures.',
+            'error'
+        );
+    }
+    else {
+        var lecture = JSON.parse(sessionStorage.getItem("lecture"));
+        slideController.loadLecture(lecture);
+        swal(
+            'Loaded lecture!',
+            'Lecture & Notes have been loaded!',
+            'success'
+        );
+    }
 });

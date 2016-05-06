@@ -1,47 +1,50 @@
 /* global $, slideController */
 
 var notesManager = {
-    _noteIndex: 0,
     saveNotes: function() {
+        var date = new Date();
+        var uniqueId = date.getTime();
         var note = $("#notes-text").val();
-        slideController.saveNote(note);
-        this._addNoteToView(note);
+        slideController.saveNote(note, uniqueId.toString());
+        this._addNoteToView(note, uniqueId.toString());
+    },
+    displayNote: function(note, id) {
+        this._addNoteToView(note, id);
     },
     clear: function() {
+        this._print("clear()");
         $("#notes-content").html("");
-        this._reset();
     },
-    _reset: function() {
-        this._noteIndex = 0;
-    },
-    _addNoteToView: function(note) {
-        var index = this._noteIndex;
-        var X = "<span data-nId=\"" + index +
-            "\" id=\"" + this._getDeleteId(index) +
+    _addNoteToView: function(note, id) {
+        var X = "<span data-nId=\"" + id +
+            "\" id=\"" + this._getDeleteId(id) +
             "\" style='color: red; float: right;'>X</span>";
-        var html = "<span data-id='" + index +
-            "' id='" + this._getElemId(index) + "'>" + note + X + "<br></span>";
+        var html = "<span data-id='" + id +
+            "' id='" + this._getElemId(id) + "'>" + note + X + "<br></span>";
         $("#notes-content").append(html);
-        this._bindRemoveHandler(index);
-        this._noteIndex++;
+        this._bindRemoveHandler(id);
     },
-    _removeNoteFromView: function(index) {
-        var elemId = this._getElemId(index);
+    _removeNoteFromView: function(id) {
+        var elemId = this._getElemId(id);
         $("#" + elemId).remove();
-        slideController.removeNote(index);
+        slideController.removeNote(id);
     },
-    _bindRemoveHandler: function(index) {
-        var deletId = this._getDeleteId(index);
-        var _index = index;
+    _bindRemoveHandler: function(id) {
+        var deletId = this._getDeleteId(id);
+        var _id = id;
         var _this = this;
         $("#" + deletId).click(function() {
-            _this._removeNoteFromView(_index);
+            _this._removeNoteFromView(_id);
+            slideController.removeNote(_id);
         });
     },
-    _getElemId: function(index) {
-        return "note-instance-" + index;
+    _getElemId: function(id) {
+        return "note-instance-" + id;
     },
-    _getDeleteId: function(index) {
-        return "note-delete-" + index;
+    _getDeleteId: function(id) {
+        return "note-delete-" + id;
+    },
+    _print: function(msg) {
+        console.log("notesManager: " + msg);
     }
 };

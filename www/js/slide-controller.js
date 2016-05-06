@@ -1,18 +1,22 @@
-/* global jQuery, $, slideLoader, createjs */
+/* global jQuery, $, slideLoader, createjs, notesManager */
 
 var slideController = {
     _contentDiv: $("slide-content"),
     _lecture: {}, // holds lecture data object
+    _nonCircularLecture: {}, // non circular
     _currSlide: null, // current slide on display
     _currEntities: null, // current slide on display
     _slideSequence: null, // slide number
     _entitySequence: null, // entity number
     _soundOn: true, // whether sound is on or not.
     _audioInstance: null, // audio instance object
+    _audioInstanceCounter: 0, // number of audio instances
+    _audioInstanceId: null, // current audio instance id
     _numSlides: null, // number of slides
     loadLecture: function(lectureData) {
         this._print("loadLecture()");
         this._lecture = lectureData;
+        this._nonCircularLecture = $.extend(true, {}, lectureData);
         this._slides = lectureData.slides;
         this._soundOn = true;
         this._numSlides = lectureData.slides.length;
@@ -22,12 +26,15 @@ var slideController = {
         this._print(lectureData.instructor);
         // Initialize our slide loader
         slideLoader.init();
-        slideLoader.setTheme(lectureData.theme);
+        slideLoader.setTheme({
+            background: lectureData.theme.background,
+            color: lectureData.theme.color
+        });
         // Set up entity handler etc. & start from slide 0
         this._prepareSlide(0);
     },
     getLectureData: function() {
-        return this._lecture;
+        return $.extend(true, {}, this._nonCircularLecture);
     },
     toggleSound: function() {
         this._print("toggleSound()");
@@ -67,21 +74,45 @@ var slideController = {
             }
         }
     },
-    saveNote: function(note) {
-        this._print("saveNote(): saving note: "+note);
+    saveNote: function(note, id) {
+        id = id.toString();
+        this._print("saveNote(): saving note: " + note);
         if (note.trim() !== "") {
-            if (typeof this._lecture.slides.notes === "undefined" ||
-                this._lecture.slides.notes === null) {
-                this._lecture.slides.notes = [];
+            var lecture = this._nonCircularLecture;
+            var currentSlide = lecture.slides[this._slideSequence];
+            if (typeof currentSlide.notes === "undefined" ||
+                currentSlide.notes === null) {
+                currentSlide.notes = {};
             }
-            this._lecture.slides.notes.push(note);
+            if (typeof id === "string") {
+                currentSlide.notes[id] = note;
+            }
         }
     },
-    removeNote: function(index) {
-        this._print("Deleting note: "+index);
-        if (typeof this._lecture.slides.notes !== "undefined" &&
-            this._lecture.slides.notes !== null) {
-            this._lecture.slides.notes.splice(index, 1);
+    removeNote: function(id) {
+        var lecture = this._nonCircularLecture;
+        var currentSlide = lecture.slides[this._slideSequence];
+        this._print("Deleting note: " + id);
+        if (typeof currentSlide.notes !== "undefined" &&
+            currentSlide.notes !== null) {
+            if (currentSlide.notes !== null &&
+                typeof currentSlide.notes[id] !== "undefined") {
+                delete currentSlide.notes[id];
+            }
+        }
+    },
+    _loadSavedNotes: function() {
+        var _this = this;
+        this._print("_loadSavedNotes()");
+        var lecture = this._nonCircularLecture;
+        var currentSlide = lecture.slides[this._slideSequence];
+        if (typeof currentSlide.notes !== "undefined" && currentSlide.notes !== null) {
+            _this._print("has notes.");
+            var notes = currentSlide.notes;
+            $.each(notes, function(id, val) {
+                _this._print(id + ": " + val);
+                notesManager.displayNote(val, id);
+            });
         }
     },
     _print: function(msg) {
@@ -89,6 +120,7 @@ var slideController = {
     },
     // Loads the slide into memory and prepares it for viewing
     _prepareSlide: function(sequence) {
+        this._print("_prepareSlide():" + sequence);
         if (sequence < this._slides.length) {
             slideLoader.clear();
             this._slideSequence = sequence;
@@ -96,6 +128,8 @@ var slideController = {
             this._currEntities = this._lecture.slides[sequence].entities;
             console.log(this._lecture.slides[sequence]);
             this._loadAudio(this._lecture.slides[sequence].audioUrl);
+            notesManager.clear();
+            this._loadSavedNotes();
         }
         else {
             throw new Error("slideController: No such slide sequence exists");
@@ -105,37 +139,45 @@ var slideController = {
     _loadAudio: function(url) {
         var _this = this;
         if (typeof url !== "undefined" && url !== null) {
-            if (_this._audioInstance !== null) {
-                createjs.Tween.get(_this._audioInstance).to({
+            if (this._audioInstance !== null) {
+                createjs.Tween.get(this._audioInstance).to({
                     volume: 0
                 }, 2500).call(function() {
-                    createjs.Sound.removeAllSounds();
-                    _this._startAudio(url);
+                    _this._audioInstance.stop();
+                    _this._initializeAudio(url);
                 });
             }
             else {
-                _this._startAudio(url);
+                this._initializeAudio(url);
             }
         }
     },
-    _startAudio: function(url) {
+    _initializeAudio: function(url) {
+        createjs.Sound.removeSound(this._audioInstanceId);
         console.log(url);
         var _this = this;
+        var soundId = "slideAudio" + this._audioInstanceCounter;
+        this._audioInstanceId = soundId;
         var audioLoaded = function(event) {
-            var instance = createjs.Sound.play("slideAudio");
-            _this._audioInstance = instance;
-            _this._audioInstance.volume = 0;
-            if (_this.isSoundOn()) {
-                createjs.Tween.get(_this._audioInstance).to({
-                    volume: 1
-                }, 1200).call(function() {
+            if (soundId === _this._audioInstanceId) {
+                console.log(".play(): " + soundId);
+                var instance = createjs.Sound.play(soundId);
+                _this._audioInstance = instance;
+                _this._audioInstance.volume = 0;
+                if (_this.isSoundOn()) {
+                    createjs.Tween.get(_this._audioInstance).to({
+                        volume: 1
+                    }, 1200).call(function() {
 
-                });
+                    });
+                }
             }
         };
         createjs.Sound.alternateExtensions = ["mp3"];
         createjs.Sound.on("fileload", audioLoaded, window);
-        createjs.Sound.registerSound(url, "slideAudio");
+        createjs.Sound.registerSound(url, soundId);
+        console.log(".registerSound(): " + soundId);
+        this._audioInstanceCounter++;
     },
     _playAudio: function() {
         this._print("_playAudio()");

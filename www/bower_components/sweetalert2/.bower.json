@@ -1,0 +1,41 @@
+{
+  "name": "sweetalert2",
+  "homepage": "https://limonte.github.io/sweetalert2/",
+  "authors": [
+    "Tristan Edwards <tristan.edwards@me.com> (http://tristanedwards.me)",
+    "Limon Monte <limon.monte@gmail.com> (http://limonte.github.io)"
+  ],
+  "dependencies": {
+    "es6-promise-polyfill": "*"
+  },
+  "ignore": [
+    "example",
+    "gulpfile.js",
+    "sweetalert.gif"
+  ],
+  "description": "A beautiful replacement for JavaScript's alert.",
+  "main": [
+    "dist/sweetalert2.min.js",
+    "dist/sweetalert2.min.css"
+  ],
+  "keywords": [
+    "alert",
+    "modal"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:limonte/sweetalert2.git"
+  },
+  "license": "MIT",
+  "version": "2.2.1",
+  "_release": "2.2.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.2.1",
+    "commit": "317b9a2a4a1bc8c1640a7a543f15450a5f8050b6"
+  },
+  "_source": "https://github.com/limonte/sweetalert2.git",
+  "_target": "^2.2.1",
+  "_originalSource": "sweetalert2",
+  "_direct": true
+}

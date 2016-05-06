@@ -7,8 +7,8 @@ var demoSlide = {
     course: "CMPSC421",
     instructor: "Xiacong Fan",
     theme: {
-        background: "#fff",
-        color: "#000"
+        background: "#ffffff",
+        color: "#000000"
     },
     slides: [{
         id: "1",

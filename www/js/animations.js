@@ -42,16 +42,22 @@ var headerAnimator = setInterval(function() {
 // ANIMATING BUTTONS
 /////////////////////
 
+var oldSize = "";
+
 $(".slide-button").hover(function() {
     if (!$(this).hasClass('animating')) {
+        oldSize = $(this).css("font-size");
+        var intSize = parseInt(oldSize);
+        var newSize = intSize * 1.5;
+        var inPx = newSize + "px";
         $(this).dequeue().stop().animate({
-            'font-size': "2em",
-            'color': "#003459"
+            'font-size': inPx,
+            'color': "#005479"
         }, "fast");
     }
 }, function() {
     $(this).addClass('animating').animate({
-        'font-size': "1.5em",
+        'font-size': oldSize,
         'color': "#000000"
     }, "normal", "linear", function() {
         $(this).removeClass('animating').dequeue();

@@ -13,7 +13,7 @@ var demoSlide = {
     slides: [{
         id: "1",
         Sequence: 1,
-        audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+        audioUrl: "/slides/audio/inspirio.mp3",
         entities: [{
             id: "1",
             type: "h1",
@@ -38,7 +38,7 @@ var demoSlide = {
     }, {
         id: "2",
         Sequence: 2,
-        audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+        audioUrl: "/slides/audio/inspirio.mp3",
         entities: [{
             id: "1",
             type: "h1",
@@ -63,7 +63,7 @@ var demoSlide = {
     }, {
         id: "3",
         Sequence: 3,
-        audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+        audioUrl: "/slides/audio/inspirio.mp3",
         entities: [{
             id: "1",
             type: "h1",
@@ -98,7 +98,7 @@ var demoSlide = {
     }, {
         id: "4",
         Sequence: 4,
-        audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+        audioUrl: "/slides/audio/inspirio.mp3",
         entities: [{
             id: "1",
             type: "img",
@@ -124,7 +124,7 @@ var demoSlide = {
     }, {
         id: "5",
         Sequence: 5,
-        audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+        audioUrl: "/slides/audio/inspirio.mp3",
         entities: [{
             id: "1",
             type: "h1",
@@ -197,7 +197,7 @@ slideController.loadLecture(demoSlide);
 //     slides: [{
 //             id: "1",
 //             Sequence: 1,
-//             audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+//             audioUrl: "/slides/audio/inspirio.mp3",
 //             entities: [{
 //                 id: "1",
 //                 type: "h1",
@@ -250,7 +250,7 @@ slideController.loadLecture(demoSlide);
 //         }, {
 //             id: "2",
 //             Sequence: 2,
-//             audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+//             audioUrl: "/slides/audio/inspirio.mp3",
 //             entities: [{
 //                 id: "1",
 //                 type: "h1",
@@ -275,7 +275,7 @@ slideController.loadLecture(demoSlide);
 //         }, {
 //             id: "3",
 //             Sequence: 3,
-//             audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+//             audioUrl: "/slides/audio/inspirio.mp3",
 //             entities: [{
 //                 id: "1",
 //                 type: "h1",
@@ -336,7 +336,7 @@ slideController.loadLecture(demoSlide);
 //         }, {
 //             id: "4",
 //             Sequence: 4,
-//             audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+//             audioUrl: "/slides/audio/inspirio.mp3",
 //             entities: [{
 //                 id: "1",
 //                 type: "h1",
@@ -397,7 +397,7 @@ slideController.loadLecture(demoSlide);
 //         }, {
 //             id: "5",
 //             Sequence: 5,
-//             audioUrl: "http://mp3-skulls.net/music/temp320/Low_Life(feat._The_Weeknd)_(www.Mp3Skulls.info).mp3",
+//             audioUrl: "/slides/audio/inspirio.mp3",
 //             entities: [{
 //                 id: "1",
 //                 type: "h1",

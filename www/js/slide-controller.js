@@ -26,6 +26,9 @@ var slideController = {
         // Set up entity handler etc. & start from slide 0
         this._prepareSlide(0);
     },
+    getLectureData: function() {
+        return this._lecture;
+    },
     toggleSound: function() {
         this._print("toggleSound()");
         if (this._soundOn) {
@@ -46,8 +49,9 @@ var slideController = {
             var entityIndx = this._entitySequence;
             slideLoader.addEntity(this._currEntities[entityIndx]);
             this._entitySequence++;
-        } else {
-            this._prepareSlide(this._slideSequence+1);
+        }
+        else {
+            this._prepareSlide(this._slideSequence + 1);
         }
     },
     previous: function() { // could be slide or animation
@@ -56,10 +60,28 @@ var slideController = {
             this._entitySequence--;
             var ent = this._currEntities[this._entitySequence];
             slideLoader.removeEntity(ent);
-        } else {
+        }
+        else {
             if (this._slideSequence > 0) {
-                this._prepareSlide(this._slideSequence-1);
+                this._prepareSlide(this._slideSequence - 1);
             }
+        }
+    },
+    saveNote: function(note) {
+        this._print("saveNote(): saving note: "+note);
+        if (note.trim() !== "") {
+            if (typeof this._lecture.slides.notes === "undefined" ||
+                this._lecture.slides.notes === null) {
+                this._lecture.slides.notes = [];
+            }
+            this._lecture.slides.notes.push(note);
+        }
+    },
+    removeNote: function(index) {
+        this._print("Deleting note: "+index);
+        if (typeof this._lecture.slides.notes !== "undefined" &&
+            this._lecture.slides.notes !== null) {
+            this._lecture.slides.notes.splice(index, 1);
         }
     },
     _print: function(msg) {
@@ -72,6 +94,8 @@ var slideController = {
             this._slideSequence = sequence;
             this._entitySequence = 0;
             this._currEntities = this._lecture.slides[sequence].entities;
+            console.log(this._lecture.slides[sequence]);
+            this._loadAudio(this._lecture.slides[sequence].audioUrl);
         }
         else {
             throw new Error("slideController: No such slide sequence exists");
@@ -79,32 +103,53 @@ var slideController = {
     },
     // Create new audio instance
     _loadAudio: function(url) {
-        if (this._audioInstance !== null) {
-            createjs.Sound.removeAllSounds();
+        var _this = this;
+        if (typeof url !== "undefined" && url !== null) {
+            if (_this._audioInstance !== null) {
+                createjs.Tween.get(_this._audioInstance).to({
+                    volume: 0
+                }, 2500).call(function() {
+                    createjs.Sound.removeAllSounds();
+                    _this._startAudio(url);
+                });
+            }
+            else {
+                _this._startAudio(url);
+            }
         }
-        createjs.Sound.alternateExtensions = ["mp3"];
-        createjs.Sound.on("fileload", audioLoaded, window);
-        createjs.Sound.registerSound(url, "slideAudio");
+    },
+    _startAudio: function(url) {
+        console.log(url);
         var _this = this;
         var audioLoaded = function(event) {
             var instance = createjs.Sound.play("slideAudio");
             _this._audioInstance = instance;
-            _this._audioInstance.volume = 1;
-            if (!_this.isSoundOn()) {
-                _this._audioInstance.stop();
+            _this._audioInstance.volume = 0;
+            if (_this.isSoundOn()) {
+                createjs.Tween.get(_this._audioInstance).to({
+                    volume: 1
+                }, 1200).call(function() {
+
+                });
             }
         };
+        createjs.Sound.alternateExtensions = ["mp3"];
+        createjs.Sound.on("fileload", audioLoaded, window);
+        createjs.Sound.registerSound(url, "slideAudio");
     },
     _playAudio: function() {
         this._print("_playAudio()");
         if (this.isSoundOn()) {
-            this._audioInstance.play();
+            this._audioInstance.volume = 1;
         }
+        console.log(this._audioInstance.volume);
     },
     _stopAudio: function() {
+        this._print("_stopAudio()");
         if (!this.isSoundOn()) {
-            this._audioInstance.stop();
+            this._print("this._audioInstance.volume = 0;");
+            this._audioInstance.volume = 0;
         }
+        console.log(this._audioInstance.volume);
     }
 };
-

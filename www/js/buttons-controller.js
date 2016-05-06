@@ -1,23 +1,4 @@
-/* global jQuery, $, slideController, slideLoader */
-
-var notesManager = {
-    saveNotes: function () {
-        var notes = $("#notes-text").val();
-        var X = "<span style='color: red; float: right;'>X</span>";
-        $("#notes-content").append(notes+" "+X+"<br>");
-    },
-    clear: function () {
-        $("#notes-content").html("");
-    },
-    init: function () {
-        $("#button-saveNotes").click(function () {
-            console.log("SAVE NOTES");
-            notesManager.saveNotes();
-        });
-    }
-};
-
-notesManager.init();
+/* global jQuery, $, slideController, slideLoader, notesManager */
 
 //////////////////////
 // Full Screen Button
@@ -114,4 +95,13 @@ $(".light-button").click(function() {
         background: "#fff",
         color: "#000"
     });
+});
+
+/////////////////
+// Notes button
+/////////////////
+
+$("#button-saveNotes").click(function() {
+    console.log("SAVE NOTES");
+    notesManager.saveNotes();
 });

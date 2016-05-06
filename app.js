@@ -35,7 +35,7 @@ app.use('/slides', express.static('slides'));
 var lStorage;
 
 if (typeof lStorage === "undefined" || lStorage === null) {
-    lStorage = new LocalStorage('./scratch');
+    lStorage = new LocalStorage('./localstorage');
 }
 
 app.post('/saveNotes', function(req, res){
